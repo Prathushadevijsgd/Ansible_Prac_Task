@@ -1,0 +1,7 @@
+# inventory.yml
+all:
+  hosts:
+    ansible_server:
+      ansible_host: 54.83.79.232 
+      ansible_user: ec2-user 
+      ansible_ssh_private_key_file: /Users/jprathushadevi/Documents/spring-petclinic-ansible/ansiblekp.pem 
