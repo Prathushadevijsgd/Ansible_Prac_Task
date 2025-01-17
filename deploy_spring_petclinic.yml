@@ -1,0 +1,33 @@
+---
+- name: Deploy Spring Petclinic Docker Application
+  hosts: all
+  become: yes  
+  tasks:
+
+    - name: Install Docker on AWS Linux (if not installed)
+      package:
+        name: docker
+        state: present
+
+    - name: Ensure Docker service is started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: prathushadevijs/spring-petclinic  
+        tag: latest  
+        source: pull 
+      become: yes
+
+    - name: Run the Docker container with Spring Petclinic
+      docker_container:
+        name: spring-petclinic
+        image: prathushadevijs/spring-petclinic:latest  
+        state: started
+        restart_policy: always  
+        ports:
+          - "8080:8080" 
+      become: yes
